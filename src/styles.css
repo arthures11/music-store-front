@@ -1,1 +1,7 @@
 @import "tailwindcss";
+.truncate-cell {
+    @apply overflow-hidden;
+    @apply text-ellipsis;
+    @apply whitespace-nowrap;
+    max-width: 20ch; /* Adjust this value as needed */
+}
