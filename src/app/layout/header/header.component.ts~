@@ -12,7 +12,7 @@ import {NgIf} from "@angular/common";
 })
 export class HeaderComponent {
 
-    constructor(public authService: AuthService) {}
+    constructor(public authService: AuthService) {} // Make authService public
 
     login(): void {
         const username = 'testuser';

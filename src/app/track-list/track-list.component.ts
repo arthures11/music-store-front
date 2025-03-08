@@ -1,9 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'; // Import OnDestroy
-import { TrackService, Track } from '../track.service'; // Import TrackService and Track
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { TrackService, Track } from '../track.service';
 import { Subscription } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
 
 @Component({
   selector: 'app-track-list',
@@ -14,13 +13,17 @@ import { CommonModule } from '@angular/common';
 export class TrackListComponent implements OnInit, OnDestroy {
 
   tracks: Track[] = [];
+
+  foundAmount: number | null = null;
   searchTerm: string = '';
   private trackSubscription: Subscription | undefined;
+  errorMessage: string | null = null;
+  dataLoaded: boolean = false;
 
   constructor(private trackService: TrackService) { }
 
   ngOnInit(): void {
-    this.loadTracks();
+    // nothing anymore
   }
 
   ngOnDestroy(): void {
@@ -29,15 +32,20 @@ export class TrackListComponent implements OnInit, OnDestroy {
     }
   }
 
-
   loadTracks(): void {
+    this.errorMessage = null;
+    this.dataLoaded = true;
     this.trackSubscription = this.trackService.getTracks(this.searchTerm)
-        .subscribe((tracks: Track[]) => {
-          this.tracks = tracks;
+        .subscribe({
+          next: (tracks) => {
+            this.tracks = tracks;
+            this.foundAmount = tracks.length;
+          },
+          error: (error) => {
+            this.tracks = [];
+            this.errorMessage = error.message;
+          }
         });
   }
 
-  onSearchTermChange(): void{
-    this.loadTracks();
-  }
 }
