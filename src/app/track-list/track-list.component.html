@@ -1,5 +1,5 @@
 <div class="container mx-auto">
-    <input type="text" [(ngModel)]="searchTerm" placeholder="Search by track name" class="w-full px-4 py-2 border border-gray-300 rounded-md mb-4">
+    <input type="text" [(ngModel)]="searchTerm" (input)="onSearchTermChange()" placeholder="Search by track name" class="w-full px-4 py-2 border border-gray-300 rounded-md mb-4">
 
     <div class="overflow-x-auto">
         <table class="min-w-full divide-y divide-gray-200">
@@ -13,7 +13,7 @@
             </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
-            <tr *ngFor="let track of filteredTracks">
+            <tr *ngFor="let track of tracks">
                 <td class="px-6 py-4 whitespace-nowrap">{{ track.name }}</td>
                 <td class="px-6 py-4 whitespace-nowrap">{{ track.album }}</td>
                 <td class="px-6 py-4 whitespace-nowrap">{{ track.artist }}</td>
