@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { TrackListComponent } from './track-list.component';
 import { TrackService } from '../track.service';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../auth.service';
 import { of, throwError } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';

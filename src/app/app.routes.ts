@@ -1,7 +1,14 @@
 import { Routes } from '@angular/router';
-import {TrackListComponent} from "./track-list/track-list.component";
 
 export const routes: Routes = [
-    { path: 'tracks', component: TrackListComponent },
-    { path: '', redirectTo: '', pathMatch: 'full' },
+  {
+    path: 'tracks',
+    loadChildren: () =>
+      import('./tracks/tracks.routes').then((m) => m.TRACKS_ROUTES),
+    data: {
+      preload: false,
+    },
+  },
+  { path: '', redirectTo: '', pathMatch: 'full' },
+  { path: '**', redirectTo: '' },
 ];

@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TrackService, Track } from './track.service';
-import { AuthService } from './auth.service';
+import { AuthService } from '../auth.service';
 
 describe('TrackService', () => {
     let service: TrackService;

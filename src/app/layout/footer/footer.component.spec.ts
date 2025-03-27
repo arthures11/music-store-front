@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FooterComponent } from './footer.component';
 import {RouterTestingModule} from "@angular/router/testing";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {TrackService} from "../../track.service";
+import {TrackService} from "../../tracks/track.service";
 import {HttpClient} from "@angular/common/http";
 
 describe('FooterComponent', () => {

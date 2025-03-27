@@ -4,7 +4,7 @@ import { HeaderComponent } from './header.component';
 import {RouterTestingModule} from "@angular/router/testing";
 import {HttpClient, HttpHandler} from "@angular/common/http";
 import {FooterComponent} from "../footer/footer.component";
-import {TrackService} from "../../track.service";
+import {TrackService} from "../../tracks/track.service";
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
