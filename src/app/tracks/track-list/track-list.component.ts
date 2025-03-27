@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Track, TrackService } from '../track.service';
 import { Observable, Subscription } from 'rxjs';
@@ -18,14 +18,11 @@ import {
   imports: [FormsModule, CommonModule],
   templateUrl: './track-list.component.html',
 })
-export class TrackListComponent implements OnInit, OnDestroy {
+export class TrackListComponent implements OnInit {
   tracks: Track[] = [];
 
-  foundAmount: number | null = null;
   searchTerm: string = '';
-  private trackSubscription: Subscription | undefined;
   errorMessage: string | null = null;
-  dataLoaded: boolean = false;
 
   tracks$: Observable<Track[]>;
   loading$: Observable<boolean>;
@@ -44,19 +41,11 @@ export class TrackListComponent implements OnInit, OnDestroy {
   private searchTermSubscription: Subscription | undefined;
 
   ngOnInit(): void {
-    // nothing anymore
-
     this.searchTermSubscription = this.store
       .select(selectSearchTerm)
       .subscribe((term) => {
         this.currentSearchTerm = term;
       });
-  }
-
-  ngOnDestroy(): void {
-    if (this.trackSubscription) {
-      this.trackSubscription.unsubscribe();
-    }
   }
 
   fetchTracks(): void {
@@ -66,21 +55,4 @@ export class TrackListComponent implements OnInit, OnDestroy {
   onSearchTermChange(term: string): void {
     this.store.dispatch(TrackActions.setSearchTerm({ searchTerm: term }));
   }
-
-  // loadTracks(): void {
-  //   this.errorMessage = null;
-  //   this.dataLoaded = true;
-  //   this.trackSubscription = this.trackService
-  //     .getTracks(this.searchTerm)
-  //     .subscribe({
-  //       next: (tracks) => {
-  //         this.tracks = tracks;
-  //         this.foundAmount = tracks.length;
-  //       },
-  //       error: (error) => {
-  //         this.tracks = [];
-  //         this.errorMessage = error.message;
-  //       },
-  //     });
-  // }
 }

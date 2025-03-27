@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpHeaders,
-} from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AuthService } from '../auth.service';
+import { environment } from '../../environments/environment';
 
 export interface Track {
   name: string;
@@ -20,7 +17,7 @@ export interface Track {
   providedIn: 'root',
 })
 export class TrackService {
-  private apiUrl = 'http://127.0.0.1:8000/api/tracks';
+  private apiUrl = environment.baseUrl + '/api/tracks';
 
   constructor(
     private http: HttpClient,
@@ -33,15 +30,7 @@ export class TrackService {
       url += `?name=${encodeURIComponent(searchTerm)}`;
     }
 
-    const headers = this.authService.isAuthenticated()
-      ? new HttpHeaders({
-          Authorization: `Bearer ${this.authService.getToken()}`,
-        })
-      : new HttpHeaders();
-
-    return this.http
-      .get<Track[]>(url, { headers })
-      .pipe(catchError(this.handleError));
+    return this.http.get<Track[]>(url).pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {
