@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { GraphqlTrackListComponent } from './graphql-track-list/graphql-track-list.component';
 
 export const routes: Routes = [
   {
@@ -9,6 +10,11 @@ export const routes: Routes = [
       preload: false,
     },
   },
+  {
+    path: 'graphql',
+    component: GraphqlTrackListComponent,
+  },
+
   { path: '', redirectTo: '', pathMatch: 'full' },
   { path: '**', redirectTo: '' },
 ];
