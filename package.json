@@ -21,10 +21,13 @@
     "@ngrx/store": "^19.0.1",
     "@ngrx/store-devtools": "^19.0.1",
     "@tailwindcss/postcss": "^4.0.12",
+    "apollo-angular": "^10.0.3",
     "postcss": "^8.5.3",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.15.0"
+    "zone.js": "~0.15.0",
+    "@apollo/client": "^3.0.0",
+    "graphql": "^16"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^19.2.1",
