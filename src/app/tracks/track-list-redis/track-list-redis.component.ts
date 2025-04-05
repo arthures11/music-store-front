@@ -11,11 +11,12 @@ import {
   selectTracksError,
   selectTracksLoading,
 } from '../state/track.selectors';
+import { HighlightPipe } from '../../shared/pipes/highlight.pipe';
 
 @Component({
   selector: 'app-track-list',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, HighlightPipe],
   templateUrl: './track-list-redis.component.html',
 })
 export class TrackListRedisComponent implements OnInit {
