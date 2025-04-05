@@ -79,9 +79,9 @@ jobs:
           BACKEND_PID=$!
           echo "Backend server started with PID $BACKEND_PID"
           cd ..
-          
-          echo "Running frontend E2E command..."
-          npm run ci:e2e
+
+      #          echo "Running frontend E2E command..."
+      #          npm run ci:e2e
 
 
       - name: Cypress run
