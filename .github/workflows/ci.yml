@@ -20,7 +20,6 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
-          # Assumes package-lock.json is at the root of music-store-front
           cache-dependency-path: ./package-lock.json
 
       - name: Install Frontend Dependencies
@@ -44,7 +43,6 @@ jobs:
       - name: Checkout Frontend Code
         uses: actions/checkout@v4
 
-      # --- Add Step to Checkout Backend Code ---
       - name: Checkout Backend Repo
         uses: actions/checkout@v4
         with:
@@ -82,8 +80,6 @@ jobs:
           cd ..
           
           echo "Running frontend E2E command..."
-          # Assumes 'ci:e2e' script uses 'start-server-and-test' correctly
-          # It will run 'npm start', wait for localhost:4200, run 'npm run cy:run'
           npm run ci:e2e
           
           echo "Stopping backend server..."
