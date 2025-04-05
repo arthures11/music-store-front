@@ -68,7 +68,7 @@ jobs:
       - name: Install Frontend Dependencies
         run: npm install
 
-      - name: Run E2E tests
+      - name: Run BE
         env:
           DATABASE_URL: sqlite+aiosqlite:///Chinook_Sqlite.sqlite
           SECRET_KEY: '091283nbjsadabsjhd81o23nasdkjnasdasdbv'
@@ -82,6 +82,11 @@ jobs:
           
           echo "Running frontend E2E command..."
           npm run ci:e2e
-          
-          echo "Stopping backend server..."
-          kill $BACKEND_PID
+
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          build: npm run build
+          start: npm start
+          browser: chrome
