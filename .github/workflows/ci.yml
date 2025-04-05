@@ -2,10 +2,11 @@ name: Frontend CI (Angular)
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - '**'
   pull_request:
-    branches: [ main ]
-
+    branches:
+      - '**'
 jobs:
   lint-test-build:
     name: Lint, Test & Build Frontend
