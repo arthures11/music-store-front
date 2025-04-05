@@ -9,12 +9,13 @@ import {
 } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { GqlTrack, TrackGqlService } from '../graphql/track-gql.service'; // Import service and type
+import { GqlTrack, TrackGqlService } from '../graphql/track-gql.service';
+import { HighlightPipe } from '../shared/pipes/highlight.pipe'; // Import service and type
 
 @Component({
   selector: 'app-graphql-track-list',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, HighlightPipe],
   templateUrl: './graphql-track-list.component.html',
 })
 export class GraphqlTrackListComponent implements OnInit, OnDestroy {
