@@ -17,4 +17,9 @@ export const routes: Routes = [
 
   { path: '', redirectTo: '', pathMatch: 'full' },
   { path: '**', redirectTo: '' },
+  {
+    path: 'tracks',
+    loadChildren: () =>
+      import('./tracks/tracks.routes').then((m) => m.TRACKS_ROUTES),
+  },
 ];

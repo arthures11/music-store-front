@@ -1,25 +1,47 @@
 <header class="bg-gray-800 text-white py-4 shadow-md">
-    <div class="container mx-auto flex justify-between items-center px-4">
-        <a routerLink="/" class="text-2xl font-bold">Music Store</a>
+  <div class="container mx-auto flex justify-between items-center px-4">
+    <a routerLink="/" class="text-2xl font-bold">Music Store</a>
 
-        <nav>
-            <ul class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4">
-                <li><a routerLink="/tracks"
-                       class="hover:bg-gray-700 px-3 py-2 rounded-md block text-center">tracklist</a></li>
-                <li><a routerLink="/graphql"
-                       class="hover:bg-gray-700 px-3 py-2 rounded-md block text-center">graphql</a>
-                </li>
-                <ng-container *ngIf="authService.isAuthenticated(); else loginButton">
-                    <button (click)="logout()" class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600">
-                        Logout
-                    </button>
-                </ng-container>
-                <ng-template #loginButton>
-                    <button (click)="login()" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-600">
-                        Login
-                    </button>
-                </ng-template>
-            </ul>
-        </nav>
-    </div>
+    <nav>
+      <ul class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4">
+        <li>
+          <a
+            routerLink="/tracks"
+            class="hover:bg-gray-700 px-3 py-2 rounded-md block text-center"
+            >tracklist</a
+          >
+        </li>
+        <li>
+          <a
+            routerLink="/tracks/redis"
+            class="hover:bg-gray-700 px-3 py-2 rounded-md block text-center"
+            >tracklist-redis</a
+          >
+        </li>
+        <li>
+          <a
+            routerLink="/graphql"
+            class="hover:bg-gray-700 px-3 py-2 rounded-md block text-center"
+            >graphql</a
+          >
+        </li>
+        <ng-container *ngIf="authService.isAuthenticated(); else loginButton">
+          <button
+            (click)="logout()"
+            class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+          >
+            Logout
+          </button>
+        </ng-container>
+        <ng-template #loginButton>
+          <button
+            (click)="login()"
+            class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-600"
+          >
+            Login
+          </button>
+        </ng-template>
+      </ul>
+    </nav>
+  </div>
 </header>

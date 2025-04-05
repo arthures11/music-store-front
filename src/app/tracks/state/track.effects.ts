@@ -43,4 +43,31 @@ export class TrackEffects {
       }),
     ),
   );
+
+  loadTracksRedis$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TrackActions.loadTracksFromRedis),
+      withLatestFrom(this.store.select(selectSearchTerm)),
+      switchMap(([action, searchTerm]) => {
+        let params = new HttpParams();
+
+        if (searchTerm) {
+          params = params.set('name', searchTerm);
+        }
+        const queryString = params.toString();
+        const url = queryString
+          ? `${this.apiUrl}-redis?${queryString}`
+          : this.apiUrl + '-redis';
+
+        return this.http.get<Track[]>(url).pipe(
+          map((tracks) => TrackActions.loadTracksFromRedisSuccess({ tracks })),
+          catchError((error) =>
+            of(
+              TrackActions.loadTracksFromRedisFailure({ error: error.message }),
+            ),
+          ),
+        );
+      }),
+    ),
+  );
 }

@@ -17,3 +17,17 @@ export const setSearchTerm = createAction(
   '[Tracks Page] Set Search Term',
   props<{ searchTerm: string }>(),
 );
+
+export const loadTracksFromRedis = createAction(
+  '[Tracks Page] Load Tracks (Redis)',
+);
+
+export const loadTracksFromRedisSuccess = createAction(
+  '[Tracks API] Load Tracks Success (Redis)',
+  props<{ tracks: Track[] }>(),
+);
+
+export const loadTracksFromRedisFailure = createAction(
+  '[Tracks API] Load Tracks Failure (Redis)',
+  props<{ error: string }>(),
+);

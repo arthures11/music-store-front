@@ -5,32 +5,44 @@ import { initialTrackState, TrackState } from './track.state';
 export const trackReducer = createReducer(
   initialTrackState,
 
-  // HANDLING SETTING THE SEARCH TERM
   on(TrackActions.setSearchTerm, (state, { searchTerm }) => ({
     ...state,
     searchTerm: searchTerm,
   })),
 
-  // HANDLING INITIALIZING TRACK LOADING
   on(TrackActions.loadTracks, (state) => ({
     ...state,
     loading: true,
     error: null,
   })),
+  on(TrackActions.loadTracksFromRedis, (state) => ({
+    ...state,
+    redisLoading: true,
+    redisError: null,
+  })),
 
-  // HANDLING SUCCESSFUL TRACK LOADING
   on(TrackActions.loadTracksSuccess, (state, { tracks }) => ({
     ...state,
     tracks: tracks,
     loading: false,
     error: null,
   })),
+  on(TrackActions.loadTracksFromRedisSuccess, (state, { tracks }) => ({
+    ...state,
+    redisTracks: tracks,
+    redisLoading: false,
+    redisError: null,
+  })),
 
-  // HANDLING FAILURE TO LOAD TRACKS
   on(TrackActions.loadTracksFailure, (state, { error }) => ({
     ...state,
     loading: false,
     error: error,
+  })),
+  on(TrackActions.loadTracksFromRedisFailure, (state, { error }) => ({
+    ...state,
+    reditLoading: false,
+    redisError: error,
   })),
 );
 
