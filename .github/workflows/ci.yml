@@ -2,10 +2,8 @@ name: Frontend CI (Angular)
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
+    branches:
+      - '**'
 jobs:
   lint-test-build:
     name: Lint, Test & Build Frontend
@@ -29,7 +27,7 @@ jobs:
         # run: npm run lint # Make sure you have a lint script in package.json
 
       - name: Run Unit Tests (CI)
-        run: npm run test
+        run: npm run test:ci
 
       - name: Build Angular App (Production)
         run: npm run build -- --configuration production
@@ -50,9 +48,9 @@ jobs:
           path: ./music-store-backend
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v4
         with:
-          python-version: '3.13'
+          python-version: '3.13.2'
 
       - name: Install Backend Dependencies
         working-directory: ./music-store-backend
@@ -70,7 +68,10 @@ jobs:
       - name: Install Frontend Dependencies
         run: npm install
 
-      - name: Run E2E tests
+      - name: Run BE
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          SECRET_KEY: '${{ secrets.SECRET_KEY }}'
         run: |
           echo "Starting backend server..."
           cd ./music-store-backend
@@ -78,9 +79,14 @@ jobs:
           BACKEND_PID=$!
           echo "Backend server started with PID $BACKEND_PID"
           cd ..
-          
-          echo "Running frontend E2E command..."
-          npm run ci:e2e
-          
-          echo "Stopping backend server..."
-          kill $BACKEND_PID
+
+      #          echo "Running frontend E2E command..."
+      #          npm run ci:e2e
+
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          build: npm run build
+          start: npm start
+          browser: chrome
