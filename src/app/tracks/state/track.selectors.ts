@@ -25,3 +25,16 @@ export const selectSearchTerm = createSelector(
   selectTrackState,
   (state: TrackState) => state.searchTerm,
 );
+
+export const selectRedisTracks = createSelector(
+  selectTrackState,
+  (state) => state.redisTracks,
+);
+export const selectRedisLoading = createSelector(
+  selectTrackState,
+  (state) => state.redisLoading,
+);
+export const selectRedisError = createSelector(
+  selectTrackState,
+  (state) => state.redisError,
+);
