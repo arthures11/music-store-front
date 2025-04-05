@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - '**'
-  pull_request:
-    branches:
-      - '**'
 jobs:
   lint-test-build:
     name: Lint, Test & Build Frontend
@@ -30,7 +27,7 @@ jobs:
         # run: npm run lint # Make sure you have a lint script in package.json
 
       - name: Run Unit Tests (CI)
-        run: npm run test
+        run: npm run test:ci
 
       - name: Build Angular App (Production)
         run: npm run build -- --configuration production
