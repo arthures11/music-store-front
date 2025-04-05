@@ -48,9 +48,9 @@ jobs:
           path: ./music-store-backend
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v4
         with:
-          python-version: '3.13'
+          python-version: '3.13.2'
 
       - name: Install Backend Dependencies
         working-directory: ./music-store-backend
@@ -69,6 +69,9 @@ jobs:
         run: npm install
 
       - name: Run E2E tests
+        env:
+          DATABASE_URL: sqlite+aiosqlite:///Chinook_Sqlite.sqlite
+          SECRET_KEY: '091283nbjsadabsjhd81o23nasdkjnasdasdbv'
         run: |
           echo "Starting backend server..."
           cd ./music-store-backend
